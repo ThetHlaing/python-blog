@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if error_message %}<div class='error'>{{error_message}}</div>{% endif %}
+    {% for post in posts %}
+        {{post.render(current_userid) | safe}}
+    {% endfor %}
+
+{% endblock %}

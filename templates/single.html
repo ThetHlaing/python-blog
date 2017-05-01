@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+{% if error_message %}
+    {{error_message}}
+{% endif %}
+{% if post %}
+        {{post.render() | safe}}
+        {% if comments %}
+            {% for comment in comments %}
+                <form method="post">
+                <div class="commentpanel" id="comment-{{comment.key().id()}}">
+                    {{comment.content}}
+                </div>
+                <div class="editpanel" id="comment-edit-{{comment.key().id()}}" style="display: none">
+                    <textarea name="comment_edit_content" style="height: 60px;">
+                        {{comment.content}}
+                    </textarea>
+                    <br/>
+                    <button type="submit" name="action" value="Edit Comment">Save</button>
+                    <button type="button" onclick="hideEditBlock({{comment.key().id()}})">Cancel</button>
+                </div>
+                <div class="maininput" id="comment-control-{{comment.key().id()}}">
+                    <input type="hidden" name="comment_id" value="{{comment.key().id()}}"/>
+                    <input type="submit" name="action" value="Delete Comment"/>
+                    <button type="button" onclick="displayEditBlock({{comment.key().id()}})">Edit Comment</button>
+                </div>
+                </form>
+            {% endfor %}
+        {% endif %}
+        {% if current_userid %}
+        <form method="post">
+            <textarea name="comment_content" row="5" style="height: 60px;">
+
+            </textarea><br/>
+            <input type="hidden" name="post_id" value="{{post.key().id()}}"/>
+            <input type="hidden" name="author_id" value="{{current_userid}}"/>
+            <input type="submit" name="action" value="Add Comment"/>
+        </form>
+        {% else %}
+        <span>Please <a href="/login">login</a> to add comment</span>
+        {% endif %}
+{% endif %}
+
+<script type="text/javascript">
+function displayEditBlock(comment_id) {
+    var editBlock = document.getElementById("comment-edit-"+comment_id);
+    var commentBlock = document.getElementById("comment-"+comment_id);
+    var commentControlBlock = document.getElementById("comment-control-"+comment_id);
+    editBlock.style.display = "block";
+    commentBlock.style.display = "none";
+    commentControlBlock.style.display = "none";
+}
+
+function hideEditBlock(comment_id) {
+    var editBlock = document.getElementById("comment-edit-"+comment_id);
+    var commentBlock = document.getElementById("comment-"+comment_id);
+    var commentControlBlock = document.getElementById("comment-control-"+comment_id);
+    commentBlock.style.display = "block";
+    commentControlBlock.style.display = "block";
+    editBlock.style.display = "none";
+}
+
+</script>
+
+{% endblock %}

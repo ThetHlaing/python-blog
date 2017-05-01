@@ -1,0 +1,26 @@
+<form method="post">
+<div class="post">
+  <div class="post-heading">
+    <div class="post-title">
+      <a href="/post/{{p.key().id()}}">
+      {{p.subject}}
+      </a>
+    </div>
+    <div class="post-date">
+      {{p.created.strftime("%b %d, %Y")}}
+    </div>
+  </div>
+  <div>Total likes {{p.like_count}} | Total dislikes {{p.dislike_count}}
+  <button type="submit" name="action" value="edit">Edit</button>
+  <button type="submit" name="action" value="delete">Delete</button>
+
+  </div>
+  <div class="post-content">
+    {{p._render_text | safe}}
+  </div>
+  <input type="hidden" name="post_id" value="{{p.key().id()}}">
+  <button type="submit" name="action" value="like">Like</button>
+  <button type="submit" name="action" value="dislike">Dislike</button>
+
+</div>
+</form>
