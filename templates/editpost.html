@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if post %}
   <h2>Edit {{post.subject}}</h2>
 
     <form method="post">
@@ -16,6 +17,11 @@
 
       <div class="error">{{error | safe}}</div>
 
-      <input type="submit">
+      <input type="submit" name="action" value="Save">
+      <input type="submit" name="action" value="Cancel">
     </form>
+
+{% else %}
+  <h2>{{error}}</h2>
+{% endif %}
 {% endblock %}

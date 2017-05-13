@@ -11,7 +11,7 @@
     </div>
   </div>
   <div>Total likes {{p.like_count}} | Total dislikes {{p.dislike_count}}
-  <button type="submit" name="action" value="edit">Edit</button>
+  <a href="/editpost/{{p.key().id()}}">Edit</a>
   <button type="submit" name="action" value="delete">Delete</button>
 
   </div>
