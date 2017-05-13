@@ -12,8 +12,7 @@
   </div>
   <div>Total likes {{p.like_count}} | Total dislikes {{p.dislike_count}}
   <a href="/editpost/{{p.key().id()}}">Edit</a>
-  <button type="submit" name="action" value="delete">Delete</button>
-
+  <a href="/deletepost/{{p.key().id()}}">Delete</a>
   </div>
   <div class="post-content">
     {{p._render_text | safe}}
@@ -21,6 +20,5 @@
   <input type="hidden" name="post_id" value="{{p.key().id()}}">
   <button type="submit" name="action" value="like">Like</button>
   <button type="submit" name="action" value="dislike">Dislike</button>
-
 </div>
 </form>

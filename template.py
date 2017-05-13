@@ -1,6 +1,7 @@
 from handlers.bloghandler import BlogHandler
 from handlers.cookiesandhash import CookiesAndHash
 from handlers.editpost import EditPost
+from handlers.deletepost import DeletePost
 from handlers.login import Login
 from handlers.logout import Logout
 from handlers.mainpage import MainPage
@@ -14,8 +15,9 @@ import webapp2
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/newpost', NewPost),
-    (r'/editpost/([0-9]+)',EditPost),
     (r'/post/([0-9]+)', PostPage),
+    (r'/editpost/([0-9]+)',EditPost),
+    (r'/deletepost/([0-9]+)',DeletePost),
     ('/cookietest',CookiesAndHash),
     ('/signup',Register),
     ('/login',Login),

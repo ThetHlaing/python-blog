@@ -18,15 +18,7 @@ class PostPage(BlogHandler):
                 if self.user_owns_post(post):
                     if action == 'like' or action == 'dislike':
                         error_message = 'You cannot like your own post'
-                    elif action == 'delete':
-                        associate_comments = Comment.all().filter('post_id',post_id)
-                        db.delete(associate_comments)
-                        db.delete(post)
-                        post.delete()
-                        self.redirect('/')
                 else:
-                    if action == 'delete':
-                        error_message = 'You can only edit or delete your own post'
                     if(action == 'like'):
                         post = Post.likePost(post)
                         post.put()

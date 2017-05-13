@@ -30,19 +30,9 @@ class MainPage(BlogHandler):
                         if self.user_owns_post(post):
                             if action == 'like' or action == 'dislike':
                                 error_message = 'You cannot like your own post'
-                            elif action == 'edit':
-                                self.redirect('/editpost/%s'%str(post.key().id()))
-                            elif action == 'delete':
-                                #Delete Comments First
-                                associate_comments = Comment.all().filter('post_id',post_id)
-                                db.delete(associate_comments)
-                                db.delete(post)
                         else:
-                            if action == 'edit' or action == 'delete':
-                                error_message = 'You can only edit or delete your own post'
                             if(action == 'like'):
                                 post = Post.likePost(post)
-
                             elif (action == 'dislike'):
                                 post = Post.dislikePost(post)
                             post.put()

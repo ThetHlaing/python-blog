@@ -18,7 +18,7 @@
       <div class="error">{{error | safe}}</div>
 
       <input type="submit" name="action" value="Save">
-      <input type="submit" name="action" value="Cancel">
+      <a href="/post/{{post.key().id()}}">Cancel</a>
     </form>
 
 {% else %}
