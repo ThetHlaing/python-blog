@@ -46,3 +46,10 @@ def post_exists(function):
             return
     return wrapper
 
+def login_required(function):
+    @wraps(function)
+    def wrapper(self):
+        if not self.user:
+            self.redirect('/login')
+    return wrapper
+

@@ -1,4 +1,5 @@
 from handlers.bloghandler import BlogHandler
+import re
 
 class Signup(BlogHandler):
     def get(self):

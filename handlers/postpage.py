@@ -2,12 +2,23 @@ from google.appengine.ext import db
 from bloghandler import BlogHandler
 from models.post import Post
 from models.comment import Comment
+from models.like import Like
+from models.dislike import DisLike
 from utilities import *
+
+
 
 class PostPage(BlogHandler):
     @post_exists
     def get(self, post_id,post):
         self.renderPage(post_id,post)
+
+    def already_liked(self,post):
+        like = Like.gql("where post = :post and user = :user", post = post,user = self.user).get()
+        if like:
+            return True
+        else:
+            return False
 
     @post_exists
     def post(self,post_id,post):
@@ -20,11 +31,14 @@ class PostPage(BlogHandler):
                         error_message = 'You cannot like your own post'
                 else:
                     if(action == 'like'):
-                        post = Post.likePost(post)
-                        post.put()
+                        if self.already_liked(post):
+                            error_message = 'You already liked this post'
+                        else:
+                            like = Like(post=post,author=self.user)
+                            like.put()
                     elif (action == 'dislike'):
-                        post = Post.dislikePost(post)
-                        post.put()
+                        dislike = DisLike(post=post,author=self.user)
+                        dislike.put()
 
                 # Adding Comment
                 if(action == 'Add Comment'):

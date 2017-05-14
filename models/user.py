@@ -1,8 +1,10 @@
 from google.appengine.ext import db
 import hashlib
+import random
+import string
 
 def make_salt(length = 5):
-    return ''.join(random.choice(letters) for x in xrange(length))
+    return ''.join(random.choice(string.letters) for x in xrange(length))
 
 def make_pw_hash(name, pw, salt = None):
     if not salt:
