@@ -1,13 +1,12 @@
 # python-blog
 
 Live demo
-_________
 
 <a href="https://udacity-blog-162705.appspot.com/">https://udacity-blog-162705.appspot.com/</a>
 
+______________________
 
 How to run the project
-______________________
 
 1. Install <a href="https://cloud.google.com/appengine/docs/standard/python/download">Google App Engine for Python</a>
 
