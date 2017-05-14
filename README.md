@@ -5,7 +5,7 @@ ______________________
 
 1. Install <a href="https://cloud.google.com/appengine/docs/standard/python/download">Google App Engine for Python</a>
 
-2. Open Command Prompt and go do the cloned folder path
+2. Open Command Prompt and go to the cloned folder path
 
 3. Run "dev_appserver.py ." commend
 
