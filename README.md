@@ -2,7 +2,7 @@
 
 Live demo
 
-<a href="https://udacity-blog-162705.appspot.com/">https://udacity-blog-162705.appspot.com/</a>
+<a href="https://udacity-blog-162705.appspot.com/" target="_blank">https://udacity-blog-162705.appspot.com/</a>
 
 ______________________
 
