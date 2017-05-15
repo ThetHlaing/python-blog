@@ -6,8 +6,6 @@ from utilities import *
 class EditPost(BlogHandler):
     @post_exists
     def get(self,post_id,post):
-        uid = self.read_secure_cookie('user_id')
-        self.user = uid and User.by_id(int(uid))
         if self.user_logged_in():
             if self.user_owns_post(post):
                 self.render('editpost.html',post=post)
