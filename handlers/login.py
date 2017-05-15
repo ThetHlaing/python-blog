@@ -12,5 +12,5 @@ class Login(BlogHandler):
             self.login(u)
             self.redirect('/welcome')
         else:
-            self.write(password)
-            #self.render("login.html",password_error="invalid login")
+            #self.write(password)
+            self.render("login.html",password_error="invalid login")
