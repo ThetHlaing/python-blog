@@ -32,10 +32,18 @@ class MainPage(BlogHandler):
                                 error_message = 'You cannot like your own post'
                         else:
                             if(action == 'like'):
-                                post = Post.likePost(post)
+                                if Post.likedPost(post,self.user.key()):
+                                    post.liked_user.append(self.user.key())
+                                    post.put()
+                                else:
+                                    error_message = 'You can like only once'
                             elif (action == 'dislike'):
-                                post = Post.dislikePost(post)
-                            post.put()
+                                if Post.dislikedPost(post,self.user.key()):
+                                    post.disliked_user.append(self.user.key())
+                                    post.put()
+                                else:
+                                    error_message = 'You cand dislike only once'
+
         posts = Post.all().order('-created')
         if self.user:
             self.render("front.html",posts=posts,current_userid = self.user.key().id(),error_message=error_message)

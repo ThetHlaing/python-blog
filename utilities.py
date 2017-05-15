@@ -27,6 +27,11 @@ def render_str(template, **params):
     t = jinja_env.get_template(template)
     return t.render(params)
 
+
+def count(iterable):
+    return sum (1 for a in iterable)
+
+
 #Decorators
 #Not sure if i should put this inside the utility file
 #Need to ask the reviewer about where to put these

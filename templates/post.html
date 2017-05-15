@@ -10,7 +10,7 @@
       {{p.created.strftime("%b %d, %Y")}}
     </div>
   </div>
-  <div>Total likes {{p.like_count}} | Total dislikes {{p.dislike_count}}
+  <div>Total likes {{p.likes}} | Total dislikes {{p.dislikes}}
   <a href="/editpost/{{p.key().id()}}">Edit</a>
   <a href="/deletepost/{{p.key().id()}}">Delete</a>
   </div>

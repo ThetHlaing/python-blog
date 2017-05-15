@@ -2,8 +2,6 @@ from google.appengine.ext import db
 from bloghandler import BlogHandler
 from models.post import Post
 from models.comment import Comment
-from models.like import Like
-from models.dislike import DisLike
 from utilities import *
 
 
@@ -14,7 +12,9 @@ class PostPage(BlogHandler):
         self.renderPage(post_id,post)
 
     def already_liked(self,post):
-        like = Like.gql("where post = :post and user = :user", post = post,user = self.user).get()
+        post_key = str(post.key())
+        user_key = str(self.user.key())
+        like = Like.gql("where post = :post and user = :user", post = post_key,user = user_key).get()
         if like:
             return True
         else:
@@ -31,14 +31,17 @@ class PostPage(BlogHandler):
                         error_message = 'You cannot like your own post'
                 else:
                     if(action == 'like'):
-                        if self.already_liked(post):
-                            error_message = 'You already liked this post'
+                        if Post.likedPost(post,self.user.key()):
+                            post.liked_user.append(self.user.key())
+                            post.put()
                         else:
-                            like = Like(post=post,author=self.user)
-                            like.put()
+                            error_message = 'You can like only once'
                     elif (action == 'dislike'):
-                        dislike = DisLike(post=post,author=self.user)
-                        dislike.put()
+                        if Post.dislikedPost(post,self.user.key()):
+                            post.disliked_user.append(self.user.key())
+                            post.put()
+                        else:
+                            error_message = 'You cand dislike only once'
 
                 # Adding Comment
                 if(action == 'Add Comment'):
