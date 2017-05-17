@@ -4,5 +4,15 @@
     {% for post in posts %}
         {{post.render(current_userid) | safe}}
     {% endfor %}
-
+<script>
+	if (window.webkitNotifications) { 
+	if (window.webkitNotifications.checkPermission() == 0) {    
+	   console.log('Good to go, you can create a notification.');
+} else {
+    window.webkitNotifications.requestPermission(function(){});
+}
+} else {
+    console.log('Your web browser does not support notifications!');
+}
+</script>
 {% endblock %}
